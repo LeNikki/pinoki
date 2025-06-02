@@ -1,6 +1,6 @@
 # pinoki
 
-A new Flutter project.
+An AI Chatbot friend
 
 ## Golden Tests
 
