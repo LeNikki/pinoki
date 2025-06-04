@@ -29,6 +29,7 @@ class LoginView extends StackedView<LoginViewModel> {
               ),
               textInputAction: TextInputAction.next,
               focusNode: viewModel.emailNode,
+              controller: viewModel.emailController,
               onSubmitted: (_) {  FocusScope.of(context).requestFocus(viewModel.passwordNode);}
             ),
             SizedBox(height: 10),
@@ -38,12 +39,13 @@ class LoginView extends StackedView<LoginViewModel> {
                 label: Text("Password"),
                 border: OutlineInputBorder()
               ),
+              controller: viewModel.passwordController,
               focusNode: viewModel.passwordNode,
               textInputAction: TextInputAction.next,
               onSubmitted: (_) => viewModel.login()
             ),
             GestureDetector(
-              onTap: (){}, 
+              onTap: (){viewModel.login();}, 
               child: Container(
                 //decoration: 
                 //BoxDecoration(
@@ -60,6 +62,66 @@ class LoginView extends StackedView<LoginViewModel> {
                 margin: EdgeInsets.only(top: 10),
                 width: MediaQuery.of(context).size.width,
                 child: Text("Login"),
+              )),
+
+              GestureDetector(
+              onTap: (){viewModel.signup();}, 
+              child: Container(
+                //decoration: 
+                //BoxDecoration(
+                  // boxShadow: [
+                  //   BoxShadow(
+                  //     offset: Offset(0, 0),
+                  //     blurRadius: 10
+                  //   )
+                  // ],
+                  
+                //),
+                color:const Color.fromARGB(153, 220, 220, 220),
+                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                margin: EdgeInsets.only(top: 10),
+                width: MediaQuery.of(context).size.width,
+                child: Text("Signup"),
+              )),
+
+              GestureDetector(
+              onTap: (){viewModel.logout();}, 
+              child: Container(
+                //decoration: 
+                //BoxDecoration(
+                  // boxShadow: [
+                  //   BoxShadow(
+                  //     offset: Offset(0, 0),
+                  //     blurRadius: 10
+                  //   )
+                  // ],
+                  
+                //),
+                color:const Color.fromARGB(153, 220, 220, 220),
+                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                margin: EdgeInsets.only(top: 10),
+                width: MediaQuery.of(context).size.width,
+                child: Text("Logout"),
+              )),
+
+               GestureDetector(
+              onTap: (){viewModel.signInWithGoogle();}, 
+              child: Container(
+                //decoration: 
+                //BoxDecoration(
+                  // boxShadow: [
+                  //   BoxShadow(
+                  //     offset: Offset(0, 0),
+                  //     blurRadius: 10
+                  //   )
+                  // ],
+                  
+                //),
+                color:const Color.fromARGB(153, 220, 220, 220),
+                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                margin: EdgeInsets.only(top: 10),
+                width: MediaQuery.of(context).size.width,
+                child: Text("Sign in with Google"),
               ))
           ],
         ),
