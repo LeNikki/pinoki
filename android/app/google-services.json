@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "197399421932",
+    "project_id": "pinoki-14a04",
+    "storage_bucket": "pinoki-14a04.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:197399421932:android:b503c78cb6149e794a16c9",
+        "android_client_info": {
+          "package_name": "com.example.pinoki"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpLTNTo8CWb0xdeV0751RmWHhALtMNuVU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
