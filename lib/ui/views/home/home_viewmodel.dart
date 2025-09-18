@@ -12,7 +12,6 @@ class HomeViewModel extends BaseViewModel {
   final _bottomSheetService = locator<BottomSheetService>();
   final _navigationService = locator<NavigationService>();
 
-
   String get counterLabel => 'Counter is: $_counter';
 
   int _counter = 0;
@@ -38,7 +37,7 @@ class HomeViewModel extends BaseViewModel {
     );
   }
 
-  void logout() async{
+  void logout() async {
     await FirebaseAuth.instance.signOut();
     _navigationService.replaceWithLoginView();
   }

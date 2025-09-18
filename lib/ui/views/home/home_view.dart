@@ -51,7 +51,7 @@ class HomeView extends StackedView<HomeViewModel> {
                       color: kcDarkGreyColor,
                       onPressed: viewModel.logout,
                       child: const Text(
-                       'Logout',
+                        'Logout',
                         style: TextStyle(
                           color: Colors.white,
                         ),

@@ -15,9 +15,10 @@ class LoginViewModel extends BaseViewModel {
 
   final _navigationService = locator<NavigationService>();
 
-  void signup() async{
+  void signup() async {
     try {
-      final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final credential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
@@ -32,18 +33,16 @@ class LoginViewModel extends BaseViewModel {
     }
   }
 
-  void login() async{
-   try {
+  void login() async {
+    try {
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text
-      );
+          email: emailController.text, password: passwordController.text);
 
-      if(credential!=null){
+      if (credential != null) {
         _navigationService.replaceWithHomeView();
       }
 
-      print (credential);
+      print(credential);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
@@ -53,7 +52,7 @@ class LoginViewModel extends BaseViewModel {
     }
   }
 
-  void logout() async{
+  void logout() async {
     await FirebaseAuth.instance.signOut();
 
     // Disconnect the Google account
@@ -66,24 +65,25 @@ class LoginViewModel extends BaseViewModel {
   }
 
   Future<UserCredential> signInWithGoogle() async {
-  // Trigger the authentication flow
+    // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
     // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
 
     // Create a new credential
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
-    
-    UserCredential user = await FirebaseAuth.instance.signInWithCredential(credential);
+
+    UserCredential user =
+        await FirebaseAuth.instance.signInWithCredential(credential);
     // Once signed in, return the UserCredential
-    if(user!=null){
+    if (user != null) {
       _navigationService.replaceWithHomeView();
     }
     return user;
   }
-
 }
