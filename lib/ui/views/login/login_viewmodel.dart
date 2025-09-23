@@ -110,6 +110,10 @@ class LoginViewModel extends BaseViewModel {
     _navigationService.navigateToForgotpasswordView();
   }
 
+  void gotoSignup() {
+    _navigationService.navigateToSignupView();
+  }
+
   void togglePasswordShow() {
     showPassword = !showPassword;
     notifyListeners();

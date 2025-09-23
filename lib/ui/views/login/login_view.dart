@@ -33,7 +33,7 @@ class LoginView extends StackedView<LoginViewModel> {
                 ),
                 verticalSpaceLarge,
                 Form(
-                    autovalidateMode: AutovalidateMode.always,
+                    autovalidateMode:  AutovalidateMode.onUserInteraction,
                     child: TextFormField(
                       validator: (value) => EmailValidator.validate(value!)
                           ? null
@@ -100,9 +100,11 @@ class LoginView extends StackedView<LoginViewModel> {
                     style: TextStyle(color: ColorThemes.mainBackground),
                   ),
                 ),
-                verticalSpaceTiny,
+                verticalSpaceSmall,
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    viewModel.gotoSignup();
+                  },
                   child: const Text(
                     'Sign up',
                     style: TextStyle(
