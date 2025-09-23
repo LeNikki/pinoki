@@ -6,6 +6,7 @@ import 'package:pinoki/ui/color_themes.dart';
 import 'package:stacked/stacked.dart';
 import 'package:pinoki/ui/common/ui_helpers.dart';
 import 'startup_viewmodel.dart';
+
 class StartupView extends StackedView<StartupViewModel> {
   const StartupView({Key? key}) : super(key: key);
 
@@ -16,24 +17,20 @@ class StartupView extends StackedView<StartupViewModel> {
     Widget? child,
   ) {
     return Scaffold(
-      backgroundColor:ColorThemes.mainBackground,
-      body:  Center(
-              child: 
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children:[ 
-                  Text("PINOKI", style: GoogleFonts.lato(
-                    textStyle: Theme.of(context).textTheme.displayLarge,
-                    fontSize: 48,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                  )),
-                const SizedBox(height: 32),
-                Center(child: _LoadingDots())
-                
-              ])
-          )
-    );
+        backgroundColor: ColorThemes.mainBackground,
+        body: Center(
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Text("PINOKI",
+              style: GoogleFonts.lato(
+                textStyle: Theme.of(context).textTheme.displayLarge,
+                fontSize: 48,
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+              )),
+          const SizedBox(height: 32),
+          Center(child: _LoadingDots())
+        ])));
   }
 
   @override

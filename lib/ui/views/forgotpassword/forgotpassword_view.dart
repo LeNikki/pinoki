@@ -31,7 +31,6 @@ class ForgotpasswordView extends StackedView<ForgotpasswordViewModel> {
                           fontWeight: FontWeight.bold)),
                 ),
                 verticalSpaceLarge,
-
                 TextField(
                     decoration: const InputDecoration(
                       hintText: "Enter email",
@@ -44,7 +43,6 @@ class ForgotpasswordView extends StackedView<ForgotpasswordViewModel> {
                     onSubmitted: (_) {
                       FocusScope.of(context).unfocus();
                     }),
-               
                 GestureDetector(
                     onTap: () {
                       viewModel.toggleResetBtn(context);
@@ -67,14 +65,15 @@ class ForgotpasswordView extends StackedView<ForgotpasswordViewModel> {
                     )),
                 verticalSpaceMedium,
                 GestureDetector(
-                  onTap: () {viewModel.backToLogin();},
+                  onTap: () {
+                    viewModel.backToLogin();
+                  },
                   child: const Text(
                     'Back to Login',
                     style: TextStyle(color: ColorThemes.mainBackground),
                   ),
                 ),
                 verticalSpaceTiny,
-                
               ],
             ),
           )),

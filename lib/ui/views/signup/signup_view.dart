@@ -4,18 +4,18 @@ import 'package:pinoki/ui/color_themes.dart';
 import 'package:pinoki/ui/common/ui_helpers.dart';
 import 'package:stacked/stacked.dart';
 
-import 'login_viewmodel.dart';
+import 'signup_viewmodel.dart';
 
-class LoginView extends StackedView<LoginViewModel> {
-  const LoginView({Key? key}) : super(key: key);
+class SignupView extends StackedView<SignupViewModel> {
+  const SignupView({Key? key}) : super(key: key);
 
   @override
   Widget builder(
     BuildContext context,
-    LoginViewModel viewModel,
+    SignupViewModel viewModel,
     Widget? child,
   ) {
-    return Scaffold(
+    return  Scaffold(
       backgroundColor: ColorThemes.offwhite,
       body: Container(
           padding: const EdgeInsets.only(left: 25.0, right: 25.0),
@@ -31,9 +31,16 @@ class LoginView extends StackedView<LoginViewModel> {
                           fontSize: 70,
                           fontWeight: FontWeight.bold)),
                 ),
-                verticalSpaceLarge,
+                Container(
+                  child: const Text('Sign up',
+                      style: TextStyle(
+                          color: ColorThemes.mainBackground,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold)),
+                ),
+                verticalSpaceMedium,
                 Form(
-                    autovalidateMode:  AutovalidateMode.onUserInteraction,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     child: TextFormField(
                       validator: (value) => EmailValidator.validate(value!)
                           ? null
@@ -67,12 +74,33 @@ class LoginView extends StackedView<LoginViewModel> {
                     obscureText: viewModel.showPassword ? false : true,
                     onSubmitted: (_) {
                       FocusScope.of(context).unfocus();
-                      viewModel.login(context);
+                      viewModel.gotoLogin();
+                    }),
+                verticalSpaceSmall,
+                TextField(
+                    decoration: InputDecoration(
+                        hintText: "Confirm password",
+                        label: Text("Confirm password"),
+                        border: OutlineInputBorder(),
+                        suffixIcon: IconButton(
+                            onPressed: () {
+                              viewModel.togglePasswordShow();
+                            },
+                            icon: Icon(viewModel.showPassword
+                                ? Icons.remove_red_eye
+                                : Icons.visibility_off))),
+                    controller: viewModel.confirmPassController,
+                    focusNode: viewModel.confirmPasswordNode,
+                    textInputAction: TextInputAction.next,
+                    obscureText: viewModel.showPassword ? false : true,
+                    onSubmitted: (_) {
+                      FocusScope.of(context).unfocus();
+                      viewModel.gotoLogin();
                     }),
                 GestureDetector(
                     onTap: () {
                       FocusScope.of(context).unfocus();
-                      viewModel.login(context);
+                      viewModel.signup(context);
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -84,29 +112,18 @@ class LoginView extends StackedView<LoginViewModel> {
                       margin: const EdgeInsets.only(top: 10),
                       width: MediaQuery.of(context).size.width,
                       child: const Center(
-                          child: Text("Login",
+                          child: Text("Signup",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontFamily: 'Noto Sans',
                               ))),
                     )),
                 verticalSpaceMedium,
+                
                 GestureDetector(
-                  onTap: () {
-                    viewModel.forgotPassword();
-                  },
+                  onTap: () {viewModel.gotoLogin();},
                   child: const Text(
-                    'Forgot password',
-                    style: TextStyle(color: ColorThemes.mainBackground),
-                  ),
-                ),
-                verticalSpaceSmall,
-                GestureDetector(
-                  onTap: () {
-                    viewModel.gotoSignup();
-                  },
-                  child: const Text(
-                    'Sign up',
+                    'Already have an account',
                     style: TextStyle(
                         color: ColorThemes.mainBackground,
                         fontWeight: FontWeight.bold),
@@ -119,8 +136,8 @@ class LoginView extends StackedView<LoginViewModel> {
   }
 
   @override
-  LoginViewModel viewModelBuilder(
+  SignupViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      LoginViewModel();
+      SignupViewModel();
 }

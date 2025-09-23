@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:pinoki/app/app.dialogs.dart';
 import 'package:pinoki/app/app.locator.dart';
 import 'package:pinoki/app/app.router.dart';
 import 'package:stacked/stacked.dart';
@@ -12,8 +14,9 @@ class LoginViewModel extends BaseViewModel {
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-
+  final dialogService = locator<DialogService>();
   final _navigationService = locator<NavigationService>();
+  bool showPassword = false;
 
   void signup() async {
     try {
@@ -33,22 +36,38 @@ class LoginViewModel extends BaseViewModel {
     }
   }
 
-  void login() async {
+  void login(BuildContext context) async {
+    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+      dialogService.showCustomDialog(
+          variant: DialogType.infoAlert,
+          title: 'Missing fields',
+          description: 'Please enter your email and password.',
+          mainButtonTitle: 'Okay');
+      return;
+    }
     try {
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
 
       if (credential != null) {
         _navigationService.replaceWithHomeView();
+      } else {
+        dialogService.showCustomDialog(
+            variant: DialogType.infoAlert,
+            title: 'Error login',
+            description: 'Please enter correct email and password',
+            mainButtonTitle: 'Okay');
       }
 
       print(credential);
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
-      }
+      if (e.code.isNotEmpty) {
+        dialogService.showCustomDialog(
+            variant: DialogType.infoAlert,
+            title: 'Error login',
+            description: 'Please enter correct email and password',
+            mainButtonTitle: 'Okay');
+      } 
     }
   }
 
@@ -85,5 +104,18 @@ class LoginViewModel extends BaseViewModel {
       _navigationService.replaceWithHomeView();
     }
     return user;
+  }
+
+  void forgotPassword() {
+    _navigationService.navigateToForgotpasswordView();
+  }
+
+  void gotoSignup() {
+    _navigationService.navigateToSignupView();
+  }
+
+  void togglePasswordShow() {
+    showPassword = !showPassword;
+    notifyListeners();
   }
 }
