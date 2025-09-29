@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:pinoki/app/app.bottomsheets.dart';
 import 'package:pinoki/app/app.dialogs.dart';
 import 'package:pinoki/app/app.locator.dart';
@@ -11,6 +12,7 @@ class HomeViewModel extends BaseViewModel {
   final _dialogService = locator<DialogService>();
   final _bottomSheetService = locator<BottomSheetService>();
   final _navigationService = locator<NavigationService>();
+  final askInputController = TextEditingController();
 
   String get counterLabel => 'Counter is: $_counter';
 
