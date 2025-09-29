@@ -84,15 +84,15 @@ class SignupView extends StackedView<SignupViewModel> {
                         border: OutlineInputBorder(),
                         suffixIcon: IconButton(
                             onPressed: () {
-                              viewModel.togglePasswordShow();
+                              viewModel.toggleConfirmPassShow();
                             },
-                            icon: Icon(viewModel.showPassword
+                            icon: Icon(viewModel.showConfrimPass
                                 ? Icons.remove_red_eye
                                 : Icons.visibility_off))),
                     controller: viewModel.confirmPassController,
                     focusNode: viewModel.confirmPasswordNode,
                     textInputAction: TextInputAction.next,
-                    obscureText: viewModel.showPassword ? false : true,
+                    obscureText: viewModel.showConfrimPass ? false : true,
                     onSubmitted: (_) {
                       FocusScope.of(context).unfocus();
                       viewModel.gotoLogin();

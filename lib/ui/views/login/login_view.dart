@@ -100,7 +100,7 @@ class LoginView extends StackedView<LoginViewModel> {
                     style: TextStyle(color: ColorThemes.mainBackground),
                   ),
                 ),
-                verticalSpaceSmall,
+                verticalSpaceMedium,
                 GestureDetector(
                   onTap: () {
                     viewModel.gotoSignup();

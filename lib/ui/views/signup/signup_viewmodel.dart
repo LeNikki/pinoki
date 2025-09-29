@@ -14,9 +14,15 @@ class SignupViewModel extends BaseViewModel {
   final confirmPassController = TextEditingController();
   final _navigationService = locator<NavigationService>();
   bool showPassword = false;
+  bool showConfrimPass = false;
 
   void togglePasswordShow(){
     showPassword = !showPassword;
+    notifyListeners();
+  }
+
+  void toggleConfirmPassShow(){
+    showConfrimPass  = !showConfrimPass;
     notifyListeners();
   }
 
